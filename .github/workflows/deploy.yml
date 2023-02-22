@@ -17,7 +17,11 @@ jobs:
       - run: npm install
       - run: npm run build
 
-      - uses: JamesIves/github-pages-deploy-action@v4
+      - name: Read file contents
+        id: read_file
+        uses: andstor/file-reader-action@v1
         with:
-          branch: gh-pages
-          folder: dist
+          path: "dist/main.js"
+
+      - name: File contents
+        run: echo "${ steps.read_file.outputs.contents }"
